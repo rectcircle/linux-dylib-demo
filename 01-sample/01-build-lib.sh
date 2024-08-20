@@ -7,3 +7,5 @@ rm -rf build/include
 cp -rf ./include ./build
 gcc -I ./build/include -shared -fPIC -o ./build/lib/libsample.so.1.0.0 ./sample.c
 ln -s libsample.so.1.0.0 ./build/lib/libsample.so
+echo '--- 查看 so 符号'
+readelf -d ./build/lib/libsample.so.1.0.0 | grep .so

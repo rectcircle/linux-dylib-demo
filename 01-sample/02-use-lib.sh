@@ -4,11 +4,13 @@ cd $(dirname $(readlink -f $0))
 rm -rf build/bin && mkdir -p build/bin
 
 
-echo '方式 1: 直接指定 so (绝对路径)'
+echo '=== 方式 1: 直接指定 so (绝对路径)'
 # 写法 1.1: 一步完成
 gcc -I ./build/include -o ./build/bin/main ./main.c ./build/lib/libsample.so
-echo 'ldd 输出'
+echo '--- ldd 输出'
 ldd ./build/bin/main
+echo '--- readelf -d 输出'
+readelf -d ./build/bin/main | grep .so
 ./build/bin/main
 # 写法 1.2: 分步骤编译
 gcc -c -I ./build/include -o ./build/main.o ./main.c
@@ -20,18 +22,20 @@ gcc -I ./build/include -o ./build/bin/main ./main.c -L ./build/lib -l sample -Wl
 echo
 
 
-echo '方式 2: 使用 -L 和 -l 指定动态库'
+echo '=== 方式 2: 使用 -L 和 -l 指定动态库'
 gcc -I ./build/include -o ./build/bin/main ./main.c -L ./build/lib -l sample
-echo 'ldd 输出'
+echo '--- ldd 输出'
 ldd ./build/bin/main
-echo '直接执行'
+echo '--- readelf -d 输出'
+readelf -d ./build/bin/main | grep .so
+echo '--- 直接执行'
 ./build/bin/main
-echo '指定 LD_LIBRARY_PATH 执行'
+echo '--- 指定 LD_LIBRARY_PATH 执行'
 LD_LIBRARY_PATH=./build/lib ./build/bin/main
 echo
 
 
-echo '有问题的写法: so 在 main.o 或 main.c 前面'
+echo '=== 有问题的写法: so 在 main.o 或 main.c 前面'
 gcc -I ./build/include -o ./build/bin/main ./build/lib/libsample.so ./main.c
 gcc -I ./build/include -L ./build/lib -lsample -o ./build/bin/main ./main.c
 # 会报错 undefined reference to `print_hello'
