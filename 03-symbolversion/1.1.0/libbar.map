@@ -1,0 +1,18 @@
+BAR_1.0 {
+    global:
+    print_bar_a;
+    print_bar_b;
+}
+
+BARprivate {
+    global:
+    __print_bar_a_1_0;
+    __print_bar_a_1_1;
+    local:
+    *;
+}
+
+BAR_1.1 {
+    global:
+    print_bar_c;
+} BAR_1.0

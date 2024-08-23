@@ -1,0 +1,10 @@
+BAR_1.0 {
+    global:
+    print_bar_a;
+    print_bar_b;
+}
+
+BARprivate {
+    local:
+    *;
+}
