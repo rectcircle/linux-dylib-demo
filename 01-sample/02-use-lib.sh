@@ -17,15 +17,14 @@ gcc -c -I ./build/include -o ./build/main.o ./main.c
 gcc -o ./build/bin/main ./build/main.o ./build/lib/libsample.so
 # ldd ./build/bin/main
 # ./build/bin/main
-# 写法 1.3: 使用 -rpath 将动态库绝对路径写入链接器
-gcc -I ./build/include -o ./build/bin/main ./main.c -L ./build/lib -l sample -Wl,-rpath,./build/lib
 echo
-
 
 echo '=== 方式 2: 使用 -L 和 -l 指定动态库'
 gcc -I ./build/include -o ./build/bin/main ./main.c -L ./build/lib -l sample
 echo '--- ldd 输出'
 ldd ./build/bin/main
+echo '--- 指定 LD_LIBRARY_PATH ldd 输出'
+LD_LIBRARY_PATH=./build/lib ldd ./build/bin/main
 echo '--- readelf -d 输出'
 readelf -d ./build/bin/main | grep .so
 echo '--- 直接执行'
@@ -34,6 +33,18 @@ echo '--- 指定 LD_LIBRARY_PATH 执行'
 LD_LIBRARY_PATH=./build/lib ./build/bin/main
 echo
 
+
+# 写法 3: 使用 -rpath 将动态库绝对路径写入链接器
+echo '=== 方式 3: 使用 -L 和 -l 指定动态库，使用 -Wl,-rpath 配置运行时查找路径。'
+gcc -I ./build/include -o ./build/bin/main ./main.c -L ./build/lib -l sample -Wl,-rpath,./build/lib
+echo '--- ldd 输出'
+ldd ./build/bin/main
+echo '--- cd 到 build 目录 ldd 输出'
+cd build && ldd ./bin/main
+echo '--- cd 到 build 目录，指定 LD_LIBRARY_PATH 后 ldd 输出'
+LD_LIBRARY_PATH=./lib ldd ./bin/main
+cd ../
+echo
 
 echo '=== 有问题的写法: so 在 main.o 或 main.c 前面'
 gcc -I ./build/include -o ./build/bin/main ./build/lib/libsample.so ./main.c

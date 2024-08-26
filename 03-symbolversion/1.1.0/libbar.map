@@ -2,17 +2,20 @@ BAR_1.0 {
     global:
     print_bar_a;
     print_bar_b;
+    print_bar_c;
 };
 
 BARprivate {
     global:
     __print_bar_a_1_0;
     __print_bar_a_1_1;
+    __print_bar_b_1_0;
+    __print_bar_b_1_1;
     local:
     *;
 };
 
 BAR_1.1 {
     global:
-    print_bar_c;
+    print_bar_d;
 } BAR_1.0;

@@ -11,4 +11,4 @@ gcc -Wl,-soname,libbar.so.1 -Xlinker --version-script ./1.1.0/libbar.map -I ./bu
 echo '--- 查看 so 符号'
 readelf -d ./build/lib/libbar.so.1.1.0 | grep .so
 echo '--- 查看 print 函数'
-readelf -s ./build/lib/libbar.so.1.0.0 | grep print
+readelf -s ./build/lib/libbar.so.1.1.0 | grep print

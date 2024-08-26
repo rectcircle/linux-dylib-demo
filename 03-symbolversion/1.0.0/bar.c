@@ -11,3 +11,6 @@ void print_bar_b() {
     printf("libbar1.0.0 b\n");
 }
 
+void print_bar_c() {
+    printf("libbar1.0.0 c\n");
+}

@@ -12,9 +12,9 @@ gcc -I ./build/include -o ./build/bin/main_a ./main_a.c -L ./build/lib -l bar
 echo '--- ldd 输出'
 ldd ./build/bin/main_a
 echo '--- readelf -d 查看 so'
-readelf -d ./build/bin/main1_0 | grep .so
+readelf -d ./build/bin/main_a | grep .so
 echo '--- readelf -s 查看 函数'
-readelf -s ./build/bin/main1_0 | grep print
+readelf -s ./build/bin/main_a | grep print
 echo
 
 
@@ -39,9 +39,9 @@ gcc -I ./build/include -o ./build/bin/main_a ./main_a.c -L ./build/lib -l bar
 echo '--- ldd 输出'
 ldd ./build/bin/main_a
 echo '--- readelf -d 查看 so'
-readelf -d ./build/bin/main1_0 | grep .so
+readelf -d ./build/bin/main_a | grep .so
 echo '--- readelf -s 查看 函数'
-readelf -s ./build/bin/main1_0 | grep print
+readelf -s ./build/bin/main_a | grep print
 echo
 
 
