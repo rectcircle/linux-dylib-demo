@@ -22,5 +22,5 @@ echo
 
 echo '=== 方式 5: 使用 -L LIBRARY_PATH 指定错误的路径观察查找路径'
 mkdir -p /tmp/by_LIBRARY_PATH /tmp/by_-l
-LIBRARY_PATH=/tmp/by_LIBRARY_PATH gcc -I ./build/include -o ./build/bin/main ./main.c -L /tmp/by_-l -l sample -Wl,-verbose | grep sample && echo '构建成功' || echo '构建失败'
+LIBRARY_PATH=/tmp/by_LIBRARY_PATH gcc -I ./build/include -o ./build/bin/main ./main.c -L /tmp/by_-l -l sample -Wl,-verbose && echo '构建成功' || echo '构建失败'  
 echo
